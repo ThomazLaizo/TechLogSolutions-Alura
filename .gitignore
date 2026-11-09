@@ -7,6 +7,7 @@ __pycache__/
 *.pyc
 
 # Variáveis de ambiente (senhas, chaves)
+chamados.http
 .env
 
 # Configurações do editor

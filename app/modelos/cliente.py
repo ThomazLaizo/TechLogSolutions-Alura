@@ -5,3 +5,8 @@ class Cliente(BaseModel):
     nome: str
     email: str
     telefone: str
+
+class ClienteCriarAtualizar(BaseModel):
+    nome: str
+    email: str
+    telefone: str
