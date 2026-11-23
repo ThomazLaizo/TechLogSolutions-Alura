@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block titulo %}Clientes - {{ super() }}{% endblock %}
+
+{% block conteudo %}
+<div class="container">
+    <div class="header-section">
+        <h1>Clientes Cadastrados</h1>
+        <a href="/clientes/novo" class="btn btn-primary">
+            + Novo Cliente
+        </a>
+    </div>
+
+    <div class="clientes-lista tabela-wrap">
+        <table class="table table-hover tabela">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Telefone</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cliente in clientes %}
+                <tr>
+                    <td data-label="ID">{{ cliente.id_ }}</td>
+                    <td data-label="Nome"><a href="/clientes/{{ cliente.id_ }}">{{ cliente.nome }}</a></td>
+                    <td data-label="Email">{{ cliente.email }}</td>
+                    <td data-label="Telefone">{{ cliente.telefone }}</td>
+                </tr>
+                {% else %}
+                <tr class="vazio">
+                    <td colspan="4">
+                        <p>Nenhum cliente cadastrado ainda.</p>
+                        <a href="/clientes/novo">Cadastrar o primeiro cliente</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

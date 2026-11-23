@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block titulo %}Login - {{ super() }}{% endblock %}
+
+{% block conteudo %}
+<div class="container auth">
+    <h1>Login</h1>
+    <p class="subtitulo">Entre com seu email e senha para acessar o sistema.</p>
+
+    <form id="formLogin" class="form-login" action="/login" method="post">
+        <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="nome@empresa.com" autocomplete="email" value="{{ email }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="senha">Senha *</label>
+            <input type="password" id="senha" name="senha" class="form-control" placeholder="*******" autocomplete="current-password" value="{{ senha }}" required>
+        </div>
+
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                <p>{{ error }}</p>
+            </div>
+        {% endif %}
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Logar</button>
+            <a href="/" class="btn btn-secondary">Cancelar</a>
+        </div>
+
+    </form>
+
+    <div class="cadastro-link">
+        <p>Ainda não tem uma conta? <a href="/registro">Criar conta</a></p>
+    </div>
+</div>
+{% endblock %}

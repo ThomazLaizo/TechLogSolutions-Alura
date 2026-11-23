@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0c2f36">
+    <title>{% block titulo %}Techlog{% endblock %}</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230c2f36'/%3E%3Ccircle cx='9' cy='23' r='3' fill='%23fff'/%3E%3Ccircle cx='23' cy='9' r='3.5' fill='%23f5b301'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+</head>
+<body>
+    {% set caminho = request.url.path %}
+    <header class="topbar">
+        <nav class="navbar navbar-expand-lg" aria-label="Navegação principal">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <span class="brand-mark" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M4 15C4 10 9 12 10 9S12 5 16 5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="0.1 3"/>
+                            <circle cx="4" cy="15" r="2" fill="#fff"/>
+                            <circle cx="16" cy="5" r="2.4" fill="#f5b301"/>
+                        </svg>
+                    </span>
+                    <span>Techlog Solutions</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+                        {% if request.cookies.get("session_token") %}
+                            <!-- Links visíveis apenas para usuários logados -->
+                            <li class="nav-item">
+                                <a class="nav-link{% if caminho == '/' %} active{% endif %}" href="/"{% if caminho == '/' %} aria-current="page"{% endif %}>Início</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link{% if caminho.startswith('/clientes') %} active{% endif %}" href="/clientes"{% if caminho.startswith('/clientes') %} aria-current="page"{% endif %}>Clientes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/docs" target="_blank" rel="noopener">API Docs</a>
+                            </li>
+                            <li class="nav-item">
+                                <div class="user-info">
+                                    <a href="/logout" class="nav-link" onclick="return confirm('Deseja realmente sair?')">Sair</a>
+                                </div>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link{% if caminho == '/login' %} active{% endif %}" href="/login"{% if caminho == '/login' %} aria-current="page"{% endif %}>Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-cta{% if caminho == '/registro' %} active{% endif %}" href="/registro"{% if caminho == '/registro' %} aria-current="page"{% endif %}>Registrar</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        {% block conteudo %}
+        {% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2026 Techlog Solutions</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', path='/js/main.js') }}"></script>
+</body>
+</html>
