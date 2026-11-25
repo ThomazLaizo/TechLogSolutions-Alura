@@ -600,7 +600,11 @@ main.container {
 /* Cadastro e edição de cliente */
 main > .container.pagina-form {
     max-width: 640px;
-    margin-left: 0;
+    margin-inline: auto;
+}
+
+main > .container.pagina-form h1 {
+    text-align: center;
 }
 
 .form-cliente {

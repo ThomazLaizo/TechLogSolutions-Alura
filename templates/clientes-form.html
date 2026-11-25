@@ -4,7 +4,7 @@
 
 {% block conteudo %}
 <div class="container pagina-form">
-    <h1>{{ 'Editar' if cliente else 'Cadastrar Novo' }} Cliente {{cliente_id}}</h1>
+    <h1>{{ 'Editar' if cliente else 'Cadastrar Novo' }} Cliente</h1>
 
     <form id="formCliente" class="form-cliente">
         <p class="form-nota">Os campos marcados com * são obrigatórios.</p>
@@ -34,7 +34,7 @@
 <script>
 // Define se é edição ou criação
 const isEdit = {{ 'true' if cliente else 'false' }};
-const clienteId = {{ cliente.id if cliente else 'null' }};
+const clienteId = {{ cliente.id_ if cliente else 'null' }};
 
 document.getElementById('formCliente').addEventListener('submit', async (e) => {
     e.preventDefault();

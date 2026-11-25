@@ -32,7 +32,16 @@ async def registrar_usuario(usuario_repositorio : Annotated[UsuarioRepositorio, 
     if not all([nome, email, senha, confirma_senha]):
         return templates.TemplateResponse(
         request = request,
+        name = "registro.html",
         context = {"error" : "Campos obrigatórios faltantes.",
+                   **data
+                   })
+
+    if senha != confirma_senha:
+        return templates.TemplateResponse(
+        request = request,
+        name = "registro.html",
+        context = {"error" : "Confirmação de senha incorreta, tente novamente.",
                    **data
                    })
 
@@ -51,6 +60,7 @@ async def registrar_usuario(usuario_repositorio : Annotated[UsuarioRepositorio, 
     if usuario: 
         response = RedirectResponse(url = "/login", status_code = 303)
         return response
+    
     return templates.TemplateResponse(
         name = "registro.html",
         request = request,
